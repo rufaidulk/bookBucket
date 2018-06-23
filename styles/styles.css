@@ -1,0 +1,274 @@
+* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+.mainWrapper{
+	width: 100%;
+	height: auto;
+	margin: auto;
+	background-color: #FFF;
+}
+.headerWrapper{
+	width: 100%;
+	height: 100px;
+	margin: auto;
+
+}
+body {margin: 0;}
+
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    height: 100px;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+}
+
+//ul.topnav li a:hover:not(.active) {background-color: #111;}
+
+ul.topnav li a.active {background-color: #4CAF50;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px){
+    ul.topnav li.right, 
+    ul.topnav li {float: none;}
+}
+ul.topnav li h3{
+	display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    margin-top: 15px;
+}
+.searchBox{
+  margin-top: 25px;
+  margin-left: 150px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+}
+.searchBox input#search{
+  width: 400px;
+  height: 50px;
+  background: #FFF;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: #63717f;
+  padding-left: 45px;	
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+/*==================================== menu bar ==================================*/
+.menubar ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #AB3535;
+}
+
+.menubar ul li {float: left;}
+
+.menubar ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 25px;
+    text-decoration: none;
+}
+
+.menubar ul li a:hover:not(.active) {background-color: #E1A7A7;}
+
+.menubar ul li a.active {background-color: #4CAF50;}
+
+.menubar ul li.right {float: right;}
+
+@media screen and (max-width: 600px){
+    .menubar ul li.right, 
+    .menubar ul li {float: none;}
+}
+/*================contents================*/
+* {
+  box-sizing:border-box;
+}
+.contentWrapper{
+	width: 100%;		
+	margin: auto;
+	background-color: #FFF;
+  height: 100%;/*dynamic div height adjustment*/
+  overflow: hidden;/*dynamic div height adjustment*/
+}
+.contentArea{
+	background-color: #FFF;
+    float:right;
+    width:80%; /* The width is 60%, by default */
+}
+#productBox{
+  width: 100%;
+  margin-left:30px;
+  margin-bottom:10px;
+
+}
+#singleProduct{
+  float: left;
+  width: 250px;
+  height: 380px;
+}
+#singleProduct img{
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+#singleProduct h6{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+#singleProduct button{
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: 20px;
+  float: right;
+  cursor: pointer;
+  width: 100px;
+  background-color: #AB3535;
+
+}
+#shoppingCart{
+  width: 100%;
+  height: 50px;
+  background-color: #87B189;
+}
+#shoppingCart span a{
+  float: right;
+  text-decoration: none;
+  padding-right: 50px;
+}
+#shoppingCart span a:hover{color:#FFF;font-weight: bolder;}
+#singleProductDetails{
+  float: left;
+  width: 100%;
+  padding-right: 100px;
+}
+#singleProductDetails img{
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+
+}
+#singleProductDetails h6{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+#singleProductDetails button{
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: 20px;
+  float: left;
+  cursor: pointer;
+  width: 100px;
+  background-color: #AB3535;
+}
+.sidebar{
+	background-color: #FFF;
+	padding:20px;
+	float:left;
+	width:20%; /* The width is 20%, by default */
+	overflow: scroll;
+  border-right: 1px solid #C0C7C9;
+  border
+
+}
+/* Use a media query to add a break point at 800px: */
+/*@media screen and (max-width:800px) {
+  .sidebar, .contentArea {
+    width:100%; /* The width is 100%, when the viewport is 800px or smaller *
+  }*/
+
+#sidebarTitle{
+	font-size: 18px; 
+	margin-left: 40px;
+	margin-right: -20px;
+	font-family: 'Titillium Web', sans-serif;
+}
+#branch{
+ 	list-style-type: none;
+ 	font-family: 'Titillium Web', sans-serif;
+    
+}
+#branch li a:hover{color: orange;}
+#semester{
+ 	list-style-type: none;
+ 	font-family: 'Titillium Web', sans-serif;
+    
+}
+#semester li a:hover{color: orange;}
+/*==========================footer===================================*/
+.footer{
+  background-color: #FDE9E9;
+  //width: 100%;
+  
+}
+.s4 p a{
+  text-decoration:none;
+}
+/*======================================================*/
+input[type=submit]{
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: 20px;
+  float: right;
+  cursor: pointer;
+  width: 100px;
+  background-color: #AB3535;
+}
+#productBox table tr td button{
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: 20px;
+  float: right;
+  cursor: pointer;
+  width: 100px;
+  background-color: #AB3535;
+}
