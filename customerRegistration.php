@@ -180,7 +180,14 @@ if (isset($_POST['register'])) {
 	$custImage=$_FILES['custImage']['name'];
 	$custImageTemp=$_FILES['custImage']['tmpName'];
 
-	//write the code for uploading files to system folder
+	//need to give permission to php to write in root folder
+	$uploadDir='/opt/lampp/htdocs/bookBucket/customers/customerImages/';
+	$uploadfile = $uploadDir . basename($_FILES['productImage']['name']);
+	if (move_uploaded_file($_FILES['custImage']['tmp_name'], $uploadfile)) {
+	    echo "File is valid, and was successfully uploaded.\n";
+	} else {
+	    echo "Upload failed";
+	}
 
 	$insertCustData="INSERT INTO customers (customerIp, customerName, customerEmail, customerPasswd, customerImage, customerCountry, customerCity, customerContact, customerAddr) VALUES ('$ipAddr', '$custName', '$custEmail', '$custPasswd', '$custImage', '$custCountry', '$custCity', '$custContact', '$custAddr')";
 	$runInsertCustData=mysqli_query($conn, $insertCustData);

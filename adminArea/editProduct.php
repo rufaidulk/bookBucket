@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <?php 
 include("includes/config.php");
+
+if (isset($_GET['edit'])) {
+	
+	$getId=$_GET['edit'];
+
+	$getPro="SELECT * FROM products WHERE productId='$getId'";
+	$runPro=mysqli_query($conn, $getPro);
+
+	$rowPro=mysqli_fetch_array($runPro);
+
+	$productTitle=$rowPro['productTitle'];
+	$productBranch=$rowPro['productBranch'];
+	$productSemester=$rowPro['productSem'];
+	$productSubject=$rowPro['productSubj'];
+	$productAuthor=$rowPro['productAuthor'];
+	$productPrice=$rowPro['productPrice'];
+	$productDesc=$rowPro['productDesc'];
+	$productKeywords=$rowPro['productKeywords'];
+
+	$productImage=$rowPro['productImage'];
+
+}
+
 ?>
 <html>
 <head>
-	<title>Add Books</title>
+	<title>Update books</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -23,13 +46,13 @@ include("includes/config.php");
 					<tbody>
 						<tr>
 							<td>Book title</td>
-							<td><input type="text" name="productTitle" size="60" required="required" /></td>
+							<td><input type="text" name="productTitle" size="60" required="required" value="<?php echo $productTitle; ?>" /></td>
 						</tr>
 						<tr>
 							<td>Course Branch</td>
 							<td>
 								<select name="productBranch" required="required" id="productBranch" onChange="getSelectedBranch()">
-									<option>Select a branch</option>
+									<option><?php echo $productBranch; ?></option>
 									<?php
 									$getBranch="SELECT * FROM branch";
 									$runBranch=mysqli_query($conn, $getBranch);
@@ -48,7 +71,7 @@ include("includes/config.php");
 							<td>Course Semester</td>
 							<td>
 								<select name="productSemester" id="productSemester" required="required" onChange="getSelectedSemester()">
-									<option>Select a semester</option>
+									<option><?php echo $productSemester; ?></option>
 									<?php
 									$getSemester="SELECT * FROM semester";
 									$runSemester=mysqli_query($conn, $getSemester);
@@ -65,30 +88,30 @@ include("includes/config.php");
 						</tr>
 						<tr>
 							<td>Book Subject Name:</td>
-							<td><input type="text" name="productSubject" placeholder="Enter subject name as same as in syllabus"></td>
+							<td><input type="text" name="productSubject" placeholder="Enter subject name as same as in syllabus" value="<?php echo $productSubject; ?>"></td>
 						</tr>
 						<tr>
 							<td>Book Author Name:</td>
-							<td><input type="text" name="productAuthor" placeholder="Author name"></td>
+							<td><input type="text" name="productAuthor" placeholder="Author name" value="<?php echo $productAuthor; ?>"></td>
 						</tr>
 						<tr>
 							<td>Book Image:</td>
-							<td><input type="file" name="productImage"></td>
+							<td><input type="file" name="productImage" value="<?php echo $productImage; ?>"></td>
 						</tr>
 						<tr>
 							<td>Book Price:</td>
-							<td><input type="text" name="productPrice"></td>
+							<td><input type="text" name="productPrice" value="<?php echo $productPrice; ?>"></td>
 						</tr>
 						<tr>
 							<td>Book Description:</td>
-							<td><textarea name="productDesc" cols="20" rows="10" ></textarea></td>
+							<td><textarea name="productDesc" cols="20" rows="10" ><?php echo $productDesc; ?></textarea></td>
 						</tr>
 						<tr>
 							<td>Book Keywords:</td>
-							<td><input type="text" name="productKeywords" placeholder="e.g:author name "></td>
+							<td><input type="text" name="productKeywords" placeholder="e.g:author name " value="<?php echo $productKeywords; ?>"></td>
 						</tr>
 						<tr align="center" >
-							<td><input type="submit" name="insertProduct" value="Insert Product Now" class="w3-button w3-round-large" style="height: 50px;width: 250px;font-size: 18px;"></td>
+							<td><input type="submit" name="insertProduct" value="Update Product Now" class="w3-button w3-round-large" style="height: 50px;width: 250px;font-size: 18px;"></td>
 						</tr>
 					</tbody>
 				</table>

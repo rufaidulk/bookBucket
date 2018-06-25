@@ -217,7 +217,6 @@ ul.topnav li h3{
 	width:20%; /* The width is 20%, by default */
 	overflow: scroll;
   border-right: 1px solid #C0C7C9;
-  border
 
 }
 /* Use a media query to add a break point at 800px: */

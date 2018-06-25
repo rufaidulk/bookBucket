@@ -53,7 +53,13 @@
 			<ul>
 			  <li style="margin-left: 30px;"><a href="index.php">Home</a></li>
 			  <li><a href="allProducts.php">All Products</a></li>
-			  <li><a href="customers/myAccount.php">My Account</a></li>
+			  <li>
+			  	<?php
+			  		if (isset($_SESSION['customerEmail'])) {
+			  			echo "<a href='customers/myAccount.php'>My Account</a>";
+			  		}
+			  	?>
+			  </li>
 			  <li><a href="#contact">Blog</a></li>
 			  <li><a href="#about">Contact Us</a></li>
 			</ul>
