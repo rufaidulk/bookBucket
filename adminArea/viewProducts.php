@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['userEmail'])) {
+	echo "<script>window.open('login.php?notAdmin=You are not an admin', '_self')</script>";
+
+}else{//closing braces at the bottom of the document
+
+?>
 <div class="table-responsive">
 	<table class="table">
 		<tr>
@@ -33,10 +42,16 @@
 			<td><?php echo "<img src='productImages/$image' style='width:80px;height:80px;'/>"; ?></td>
 			<td><?php echo "$".$price; ?></td>
 			<td><a href="index.php?edit=<?php echo $proId; ?>" style="text-decoration: none;">Edit</a></td>
-			<td><a href="deleteProduct.php" style="text-decoration: none;">Delete</a></td>
+			<td><a href="deleteProduct.php?del=<?php echo $proId; ?>" style="text-decoration: none;">Delete</a></td>
 		</tr>
 		<?php
 		}
 		?>
 	</table>
 </div>
+
+<?php
+
+}// session else statement closes here
+
+?>

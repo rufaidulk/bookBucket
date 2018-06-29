@@ -1,5 +1,13 @@
 <!DOCTYPE html>
-<?php 
+<?php
+session_start();
+
+if (!isset($_SESSION['userEmail'])) {
+	echo "<script>window.open('login.php?notAdmin=You are not an admin', '_self')</script>";
+
+}else{//closing braces at the bottom of the document
+
+	
 include("includes/config.php");
 ?>
 <html>
@@ -96,10 +104,6 @@ include("includes/config.php");
 		</form>
 	</div>
 
-<script type='text/javascript'>
-    `
-</script>
-
 </body>
 </html>
 <?php
@@ -131,7 +135,10 @@ include("includes/config.php");
 
 		if ($insertPro) {
 			echo "<script>alert('Product has been inserted!')</script>";
-			echo "<script>window.open('insertProduct.php','_self')</script>";//page refreshment for avoiding the chance of double insertion
+			echo "<script>window.open('index.php?insertPrdt','_self')</script>";//page refreshment for avoiding the chance of double insertion
 		}
 	}
+
+}// session else statement closes here
+
 ?>

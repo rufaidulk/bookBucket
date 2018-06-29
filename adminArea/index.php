@@ -1,3 +1,12 @@
+<?php 
+session_start();
+
+if (!isset($_SESSION['userEmail'])) {
+	echo "<script>window.open('login.php?notAdmin=You are not an admin', '_self')</script>";
+
+}else{//closing braces at the bottom of the document
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +41,7 @@
 				</ul>
 			</div>
 			<div class="contentArea">
+				<h2 style="text-align: center;"><?php echo @$_GET['loggedIn']; ?></h2>
 				<?php
 				if (isset($_GET['insertPrdt'])) {
 					include("insertProduct.php");
@@ -41,6 +51,27 @@
 				}
 				if (isset($_GET['edit'])) {
 					include("editProduct.php");
+				}
+				if (isset($_GET['newBranch'])) {
+					include("insertBranch.php");
+				}
+				if (isset($_GET['viewBranch'])) {
+					include("viewBranches.php");
+				}
+				if (isset($_GET['editBran'])) {
+					include("editBranch.php");
+				}
+				if (isset($_GET['newSem'])) {
+					include("insertSem.php");
+				}
+				if (isset($_GET['viewSem'])) {
+					include("viewSem.php");
+				}
+				if (isset($_GET['editSem'])) {
+					include("editSem.php");
+				}
+				if (isset($_GET['viewCust'])) {
+					include("viewCustomers.php");
 				}
 				?>
 			</div>
@@ -103,37 +134,6 @@
 </body>
 
 </html>
-<!--body style="background-color: #187eae;">
-	<div class="mainContent">
-		<div id="header">
-			
-		</div>
-		<div class="contentWrapper">
-			<div id="left">
-				<h3 style="text-align: center;">Manage Content</h3>
-
-				<a href="insertProduct.php">Insert new product</a>
-				<a href="index.php?viewAllPrdt">View all products</a>
-				<a href="index.php?newBranch">Add new branch</a>
-				<a href="index.php?viewBranch">View all branches</a>
-				<a href="index.php?newSem">Add new semester</a>
-				<a href="index.php?viewSem">View all semesters</a>
-				<a href="index.php?viewCust">View customers</a>
-				<a href="index.php?viewOrders">View orders</a>
-				<a href="index.php?viewPayments">View payments</a>
-				<a href="logout.php">Admin logout</a>
-			</div>
-			<div id="right">
-				<?php
-			/*	if (isset($_GET['viewAllPrdt'])) {
-					include("viewProducts.php");
-				}
-				if (isset($_GET['edit'])) {
-					echo "<script>window.open('editProduct.php', '_self')</script>";
-				}*/
-				?>
-			</div>
-		</div>
-	</div>
-
-</body-->
+<?php 
+		}//else statement closes here
+?>

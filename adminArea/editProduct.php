@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <?php 
+session_start();
+
+if (!isset($_SESSION['userEmail'])) {
+	echo "<script>window.open('login.php?notAdmin=You are not an admin', '_self')</script>";
+
+}else{//closing braces at the bottom of the document
+
+	
 include("includes/config.php");
 
 if (isset($_GET['edit'])) {
@@ -21,6 +29,22 @@ if (isset($_GET['edit'])) {
 	$productKeywords=$rowPro['productKeywords'];
 
 	$productImage=$rowPro['productImage'];
+	/*value can be changed to $branchName for displaying branchName
+	 as branchName will store in database directly instead of branchId 
+	 while inserting product*/
+
+	//displaying branch and semester name instead of their id's
+	$getBran="SELECT * FROM branch WHERE branchId='$productBranch'";
+	$runBran=mysqli_query($conn, $getBran);
+	$rowBran=mysqli_fetch_array($runBran);
+	$branName=$rowBran['branchName'];
+
+	$getSem="SELECT * FROM semester WHERE semesterId='$productSemester'";
+	$runSem=mysqli_query($conn, $getSem);
+	$rowSem=mysqli_fetch_array($runSem);
+	$semName=$rowSem['semesterName'];
+
+
 
 }
 
@@ -40,7 +64,7 @@ if (isset($_GET['edit'])) {
 </head>
 <body>
 	<div class="container" style="margin-top: 20px;">
-		<form action="insertProduct.php" method="POST" enctype="multipart/form-data" >
+		<form action="" method="POST" enctype="multipart/form-data" >
 			<div class="table-responsive">
 				<table class="table">
 					<tbody>
@@ -52,7 +76,7 @@ if (isset($_GET['edit'])) {
 							<td>Course Branch</td>
 							<td>
 								<select name="productBranch" required="required" id="productBranch" onChange="getSelectedBranch()">
-									<option><?php echo $productBranch; ?></option>
+									<option><?php echo $branName; ?></option>
 									<?php
 									$getBranch="SELECT * FROM branch";
 									$runBranch=mysqli_query($conn, $getBranch);
@@ -61,7 +85,7 @@ if (isset($_GET['edit'])) {
 										$branchId=$rowBranch['branchId'];
 										$branchName=$rowBranch['branchName'];
 										
-										echo "<option value='$branchId'>$branchName</option>";
+										echo "<option value='$branchId'>$branchName</option>";/*value can be changed to $branchName for displaying branchName as branchName will store in database directly instead of branchId while inserting product*/
 									}
 									?>
 								</select>
@@ -71,7 +95,7 @@ if (isset($_GET['edit'])) {
 							<td>Course Semester</td>
 							<td>
 								<select name="productSemester" id="productSemester" required="required" onChange="getSelectedSemester()">
-									<option><?php echo $productSemester; ?></option>
+									<option><?php echo $semName; ?></option>
 									<?php
 									$getSemester="SELECT * FROM semester";
 									$runSemester=mysqli_query($conn, $getSemester);
@@ -111,7 +135,7 @@ if (isset($_GET['edit'])) {
 							<td><input type="text" name="productKeywords" placeholder="e.g:author name " value="<?php echo $productKeywords; ?>"></td>
 						</tr>
 						<tr align="center" >
-							<td><input type="submit" name="insertProduct" value="Update Product Now" class="w3-button w3-round-large" style="height: 50px;width: 250px;font-size: 18px;"></td>
+							<td><input type="submit" name="updateProduct" value="Update Product Now" class="w3-button w3-round-large" style="height: 50px;width: 250px;font-size: 18px;"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -126,7 +150,8 @@ if (isset($_GET['edit'])) {
 </body>
 </html>
 <?php
-	if (isset($_POST['insertProduct'])) {
+	if (isset($_POST['updateProduct'])) {
+
 		//getting the book data from text fields
 		$productTitle=$_POST['productTitle'];
 		$productBranch=$_POST['productBranch'];
@@ -141,20 +166,25 @@ if (isset($_GET['edit'])) {
 		$productImageTmp=$_FILES['productImage']['tmpName'];
 
 		//need to give permission to php to write in root folder
-		$uploadDir='/opt/lampp/htdocs/bookbucket/adminArea/productImages/';
+		/*$uploadDir='/opt/lampp/htdocs/bookBucket/adminArea/productImages/';
 		$uploadfile = $uploadDir . basename($_FILES['productImage']['name']);
 		if (move_uploaded_file($_FILES['productImage']['tmp_name'], $uploadfile)) {
 	      echo "File is valid, and was successfully uploaded.\n";
 	    } else {
 	       echo "Upload failed";
-	    }
+	    }*/
 
-		$insertProduct="INSERT INTO products (productBranch, productSem, productSubj, productTitle, productAuthor, productPrice, productDesc, productKeywords, productImage) VALUES ('$productBranch', '$productSemester', '$productSubject', '$productTitle', '$productAuthor', '$productPrice', '$productDesc', '$productKeywords', '$productImage')";
-		$insertPro=mysqli_query($conn, $insertProduct);
+		$updateProduct="UPDATE products SET productTitle='$productTitle', productBranch='$productBranch', productSem='$productSemester', productSubj='$productSubject', productAuthor='$productAuthor', productPrice='$productPrice', productDesc='$productDesc', productKeywords='$productKeywords' WHERE productId='$getId'";//image updating code is not written
+		$updatePro=mysqli_query($conn, $updateProduct);
 
-		if ($insertPro) {
-			echo "<script>alert('Product has been inserted!')</script>";
-			echo "<script>window.open('insertProduct.php','_self')</script>";//page refreshment for avoiding the chance of double insertion
+		if ($updatePro) {
+			echo "<script>alert('Product has been updated!')</script>";
+			echo "<script>window.open('index.php?viewAllPrdt','_self')</script>";//page refreshment for avoiding the chance of double insertion
+		}else{
+			echo "<script>alert('error occured!')</script>";
 		}
 	}
+
+}// session else statement closes here
+
 ?>
